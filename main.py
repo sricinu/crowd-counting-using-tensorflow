@@ -12,7 +12,7 @@ class People_Counter:
 
     def __init__(self, path):
         self.path = path
-        self.detection_graph = tf.Graph()
+        self.detection_graph = tf.compat.v1.Graph()
         with self.detection_graph.as_default():
             od_graph_def = tf.GraphDef()
             with tf.gfile.GFile(self.path, 'rb') as fid:
