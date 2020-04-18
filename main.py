@@ -12,9 +12,9 @@ class People_Counter:
 
     def __init__(self, path):
         self.path = path
-        self.detection_graph = tf.compat.v1.Graph()
+        self.detection_graph = tf.io.Graph()
         with self.detection_graph.as_default():
-            od_graph_def = tf.GraphDef()
+            od_graph_def = tf.compat.v1.GraphDef()
             with tf.gfile.GFile(self.path, 'rb') as fid:
                 serialized_graph = fid.read()
                 od_graph_def.ParseFromString(serialized_graph)
