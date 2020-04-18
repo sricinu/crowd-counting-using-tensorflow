@@ -5,6 +5,10 @@ import time
 import glob
 from progressbar import *
 
+if tf.__version__ < '1.4.0':
+    raise ImportError(
+        'Please upgrade your tensorflow installation to v1.4.* or later!')
+
 widgets = [Bar('>'), ' ', ETA(), ' ', ReverseBar('<')]
 pbar = ProgressBar(widgets=widgets, maxval=10000000)
 
@@ -21,7 +25,7 @@ class People_Counter:
                 tf.import_graph_def(od_graph_def, name='')
 
         self.default_graph = self.detection_graph.as_default()
-        self.sess = tf.Session(graph=self.detection_graph)
+        self.sess = tf.compat.v1.Session(graph=self.detection_graph)
 
         self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0') # Defining tensors for the graph
         self.detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0') # Each box denotes part of image with a person detected 
